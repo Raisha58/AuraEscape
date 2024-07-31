@@ -2,11 +2,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const Listing = require("./models/listing.js");
+const path = require("path");
 
-// Connecting to the database
 const MONGO_URL = "mongodb://127.0.0.1:27017/AuraEscape";
 
-// calling main function for db
 main()
   .then(() => {
     console.log("Connected to DB");
@@ -19,29 +18,19 @@ async function main() {
   await mongoose.connect(MONGO_URL);
 }
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+app.use(express.urlencoded({ extended: true }));
+
 // Creating API
 app.get("/", (req, res) => {
   res.send("Hi, I am root");
 });
 
-// Creating a new route
-app.get("/testListing", async (req, res) => {
-  try {
-    let sampleListing = new Listing({
-      title: "Annapurna Guest House",
-      description: "At the heart of Bhaktapur",
-      price: 1200,
-      location: "Bhaktapur",
-      country: "Nepal",
-    });
-
-    await sampleListing.save();
-    console.log("Sample was saved");
-    res.send("Successful testing");
-  } catch (err) {
-    console.error("Error saving sample listing:", err);
-    res.status(500).send("An error occurred");
-  }
+// Index Route
+app.get("/listings", async (req, res) => {
+  const allListings = await Listing.find({});
+  res.render("listings/index", { allListings: allListings }); // Updated path
 });
 
 app.listen(8080, () => {
