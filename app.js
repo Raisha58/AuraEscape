@@ -25,6 +25,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
+app.use(express.static(path.join(__dirname, "public")));
 
 // Creating API
 app.get("/", (req, res) => {
@@ -39,7 +40,7 @@ app.get("/listings/new", (req, res) => {
 // Index Route
 app.get("/listings", async (req, res) => {
   const allListings = await Listing.find({});
-  res.render("listings/index", { allListings: allListings }); // Updated path
+  res.render("listings/index", { allListings: allListings });
 });
 
 // show route
