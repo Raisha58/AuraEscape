@@ -1,6 +1,6 @@
-/* body {
-  background-color: #faeded;
-} */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
 
 /* NAVBAR */
 .navbar {
@@ -64,4 +64,22 @@
 
 .card-body {
   padding: 0 !important;
+}
+
+.card-text p {
+  font-weight: 400;
+}
+
+.listing-link {
+  text-decoration: none;
+}
+
+/* CARD EFFECT */
+.card-img-overlay {
+  opacity: 0;
+}
+
+.card-img-overlay:hover {
+  opacity: 0.15;
+  background-color: #f1dcdc;
 }
