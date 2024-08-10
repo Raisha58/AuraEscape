@@ -40,7 +40,8 @@ app.get("/listings/new", (req, res) => {
 // Index Route
 app.get("/listings", async (req, res) => {
   const allListings = await Listing.find({});
-  res.render("listings/index", { allListings: allListings });
+  const sampleData = require("../AuraEscape/init/data.js").data;
+  res.render("listings/index", { allListings: sampleData, allListings });
 });
 
 // show route
