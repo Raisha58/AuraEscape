@@ -1,11 +1,8 @@
 <% layout("/layouts/boilerplate") %>
 <h3>All Listings</h3>
-<!-- <form method="GET" action="/listings/new">
-    <button>Create New Listing</button> -->
-<!-- </form> -->
+
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
   <% for(let listing of allListings) { %>
-  <!-- Creating achor tag so that image/title ma click garesi description dekhauxa -->
   <a href="/listings/<%= listing._id %>" class="listing-link">
     <div class="card col">
       <img
@@ -15,16 +12,15 @@
         style="height: 20rem"
       />
 
-      <!-- for overlay in image  -->
       <div class="card-img-overlay"></div>
 
-      <!-- added height for cards image with style height -->
       <div class="card-body">
         <p class="card-text">
           <b><%= listing.title %> </b><br />
-          &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+          &#8377;<%= listing.price !== null && listing.price !== undefined ?
+          listing.price.toLocaleString("en-IN") : 'Price not available' %> /
+          night
         </p>
-        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
       </div>
     </div>
   </a>
