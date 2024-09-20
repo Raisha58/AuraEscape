@@ -150,14 +150,14 @@ app.post(
 );
 // Delete Review Route
 app.delete(
-  "listing/:id/reviews/:reviewId",
+  "/listings/:id/reviews/:reviewId",
   wrapAsync(async (req, res) => {
     let { id, reviewId } = req.params;
 
     await Listing.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
 
-    res.redirect(`/listing/${id}`);
+    res.redirect(`/listings/${id}`);
   })
 );
 
@@ -171,7 +171,7 @@ app.all("*", (req, res, next) => {
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went Wrong" } = err;
   res.status(statusCode).render("error.ejs", { message });
-  res.status(statusCode).send(message);
+  // res.status(statusCode).send(message);
 });
 
 app.listen(8080, () => {
