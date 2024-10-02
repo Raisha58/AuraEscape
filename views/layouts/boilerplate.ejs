@@ -30,7 +30,9 @@
     <%- include("../includes/navbar.ejs") %>
 
     <!-- for body -->
-    <div class="container"><%- body %></div>
+    <div class="container">
+      <%- include("../includes/flash.ejs") %> <%- body %>
+    </div>
 
     <!-- for footer -->
     <%- include("../includes/footer.ejs") %>
