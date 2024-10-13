@@ -11,8 +11,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
 
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/AuraEscape";
 
@@ -68,9 +69,20 @@ app.use((req, res, next) => {
   next();
 });
 
+// app.get("/demouser", async (req, res) => {
+//   let fakeUser = new User({
+//     email: "student@gmail.com",
+//     username: "delta-student",
+//   });
+
+//   let registeredUser = await User.register(fakeUser, "helloworld!");
+//   res.send(registeredUser);
+// });
+
 // Using express router from listing.js and review.js
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 // Creating error handling middleware
 // for all pages that doesnt exists
