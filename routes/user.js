@@ -33,11 +33,11 @@ router.post(
   "/login",
   passport.authenticate("local", {
     failureRedirect: "/login",
-    failureFlash: true,
+    failureFlash: true, // This will trigger the error flash message on failure
   }),
-  async (req, res) => {
-    res.flash("success", "Welcome back to AuraEscape! You are logged in");
-    res.redirect("/listings");
+  (req, res) => {
+    req.flash("success", "Welcome back to AuraEscape!");
+    res.redirect("/listings"); // Redirect to listings on successful login
   }
 );
 
